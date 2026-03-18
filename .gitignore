@@ -1,0 +1,17 @@
+.direnv
+
+
+# emacs autosaves
+.#*
+
+# Added by cargo
+
+/target
+/examples/hello_pipeline/work/*
+
+
+# Added by cargo
+#
+# already existing elements were commented out
+
+#/target
