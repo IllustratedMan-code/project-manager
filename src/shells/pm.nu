@@ -1,10 +1,10 @@
 
-# Completions for pm.
+# Completions for {{name}}
 
 #
 
-def "nu-complete pm projects" [] {
-  ^project-manager --list
+def "nu-complete {{name}} projects" [] {
+  ^project-jump --list
   | lines
   | each { |l|
       let parts = ($l | split row ": ")
@@ -12,39 +12,39 @@ def "nu-complete pm projects" [] {
   }
 }
 
-# def "nu-complete pm first-arg" [] {
+# def "nu-complete {{name}} first-arg" [] {
 #   let flags = [
 #     { value: "--new",    description: "Add current directory as a new project" },
 #     { value: "--remove", description: "Remove a project" },
 #   ]
-#   $flags | append (nu-complete pm projects)
+#   $flags | append (nu-complete {{name}} projects)
 # }
 
 # =============================================================================
-# Command for pm.
+# Command for {{name}}.
 #
 
-def --env pm [
-  project?: string@"nu-complete pm projects" # switch to project
+def --env {{name}} [
+  project?: string@"nu-complete {{name}} projects" # switch to project
   --new: string # add current dir to projects
-  --remove: string@"nu-complete pm projects" # remove project
+  --remove: string@"nu-complete {{name}} projects" # remove project
 ] {
 
   if $project != null {
-    cd (project-manager --project $project)
+    cd (project-jump --project $project)
   } else if $new != null {
-    project-manager --new $new
+    project-jump --new $new
   } else if $remove != null {
-    project-manager --remove $remove
+    project-jump --remove $remove
   } else {
       let selected = (
-        ^project-manager --list
+        ^project-jump --list
         | ^fzf --prompt="Project: "
         | split row ": "
 	| first 
       )
       if $selected != "" {
-        cd (^project-manager --project $selected )
+        cd (^project-jump --project $selected )
       }
   }
 }

@@ -16,6 +16,9 @@ struct Args {
     init: Option<Shell>,
 
     #[arg(long)]
+    init_name: Option<String>,
+
+    #[arg(long)]
     project: Option<String>,
 
     #[arg(long)]
@@ -32,7 +35,13 @@ fn main() -> std::io::Result<()> {
     let args = Args::parse();
 
     if let Some(v) = args.init {
-        v.init();
+        let name;
+        if let Some(v) = args.init_name {
+            name = v;
+        }else{
+            name = "pj".to_string()
+        }
+        v.init(name);
         return Ok(());
     }
 

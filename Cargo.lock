@@ -197,7 +197,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "project-manager"
+name = "project-jump"
 version = "0.1.0"
 dependencies = [
  "clap",

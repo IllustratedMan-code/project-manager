@@ -37,12 +37,7 @@
           # system.
 
           # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
-          packages.default = pkgs.rustPlatform.buildRustPackage rec{
-            pname = "project-manager";
-            version = "0.1";
-            cargoLock.lockFile = ./Cargo.lock;
-            src = pkgs.lib.cleanSource ./.;
-          };
+          packages.default = pkgs.callPackage ./package.nix {};
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
               packages.default
@@ -53,7 +48,6 @@
               clippy
               cargo-modules
 	            mdbook
-
             ];
           };
         };
