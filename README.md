@@ -74,7 +74,9 @@ eval "$(project-jump --init zsh)"
 
 <details>
 <summary>Nushell</summary>
+
 Add to the end of your env file (`$nu.env-path`)
+
 ```shell
 project-jump --init nushell | save -f ~/.config/nushell/pj.nu
 ```
